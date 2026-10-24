@@ -32,11 +32,11 @@
 
 | Field | Your Answer |
 |-------|-------------|
-| **Full Name** | [Write your full name here] |
-| **Student ID** | [Write your student ID here] |
-| **University Email** | [yourid]@std.psau.edu.sa |
-| **GitHub Username** | [your-github-username] |
-| **Repository Link** | [Paste your repository link here] |
+| **Full Name** | [shaikhah mohammed alfawaz] |
+| **Student ID** | [446051747] |
+| **University Email** | [446051747]@std.psau.edu.sa |
+| **GitHub Username** | [shaikhah-9] |
+| **Repository Link** | [https://github.com/shaikhah-9/OS-Assignment3-shaikhah-alfawaz] |
  
 ---
 
@@ -132,16 +132,15 @@
 
 ## Your Development Log
 
-### Entry 1 - [Date and Time]
-**What I did**:
+### Entry 1 - [October 24 2026, 12:00 AM - 1:00 AM]
+**What I did**: Set up my repository and personalized the code.
+**Details**:I read the assignment PDF and the README.md,renamed my fork and set my student ID .
 
-**Details**:
+**Challenges**:When I ran git commit the terminal got stuck on dquote> and the commit did not happen.
 
-**Challenges**:
+**Solution**:I found that the closing quotation mark was a curly quote ” instead of a normal straight quote "
 
-**Solution**:
-
-**Time spent**:
+**Time spent**: About 1 hour
 
 ---
 
@@ -302,7 +301,12 @@
 
 Verification block of the **original starter**:
 ```
-[Paste the verification block (or the exception/watchdog message) of the starter here]
+═══ VERIFICATION (expected values are computed from YOUR seed) ═══
+  Context switches (quanta executed)     expected 32       observed 28       ✘ MISMATCH
+  Completed processes                    expected 14       observed 12       ✘ MISMATCH
+  Total service time (ms)                expected 125592   observed 111301   ✘ MISMATCH
+  Busy-waiting polls (must be 0)         expected 0        observed 748      ✘ MISMATCH
+  ✘ At least one check failed (see the ✘ lines above): a race condition or busy waiting is still present.
 ```
 
 Verification block of **my final version**:

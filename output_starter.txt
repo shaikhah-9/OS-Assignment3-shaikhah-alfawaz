@@ -1,0 +1,55 @@
+
+[1m[96m╔═══════════════════════════════════════════════════════════════════════════════════════╗[0m
+[1m[96m║[0m[44m[97m[1m           CONCURRENT CPU SCHEDULER SIMULATION (ASSIGNMENT 3 - SYNCHRONIZATION)          [0m[1m[96m║[0m
+[1m[96m╠═══════════════════════════════════════════════════════════════════════════════════════╣[0m
+[1m[96m║[0m[33m  Processes:       [0m[93m14                                                                  [1m[96m║[0m
+[1m[96m║[0m[33m  Time Quantum:    [0m[93m5000ms (nominal, simulated 5x faster)                               [1m[96m║[0m
+[1m[96m║[0m[33m  CPUs:            [0m[93m3                                                                   [1m[96m║[0m
+[1m[96m║[0m[33m  Student ID:      [0m[93m446051747                                                           [1m[96m║[0m
+[1m[96m╚═══════════════════════════════════════════════════════════════════════════════════════╝[0m
+
+[34m  ➕ [1m[36mP1[0m[34m (Priority: 8) added to ready queue[0m │ Remaining: [33m7227ms[0m of 7227ms
+[34m  ➕ [1m[36mP2[0m[34m (Priority: 1) added to ready queue[0m │ Remaining: [33m6290ms[0m of 6290ms
+[34m  ➕ [1m[36mP3[0m[34m (Priority: 9) added to ready queue[0m │ Remaining: [33m8001ms[0m of 8001ms
+[34m  ➕ [1m[36mP4[0m[34m (Priority: 7) added to ready queue[0m │ Remaining: [33m11159ms[0m of 11159ms
+[34m  ➕ [1m[36mP5[0m[34m (Priority: 3) added to ready queue[0m │ Remaining: [33m7902ms[0m of 7902ms
+[34m  ➕ [1m[36mP6[0m[34m (Priority: 3) added to ready queue[0m │ Remaining: [33m12306ms[0m of 12306ms
+[34m  ➕ [1m[36mP7[0m[34m (Priority: 7) added to ready queue[0m │ Remaining: [33m11941ms[0m of 11941ms
+[34m  ➕ [1m[36mP8[0m[34m (Priority: 4) added to ready queue[0m │ Remaining: [33m12498ms[0m of 12498ms
+[34m  ➕ [1m[36mP9[0m[34m (Priority: 8) added to ready queue[0m │ Remaining: [33m3796ms[0m of 3796ms
+[34m  ➕ [1m[36mP10[0m[34m (Priority: 8) added to ready queue[0m │ Remaining: [33m8632ms[0m of 8632ms
+[34m  ➕ [1m[36mP11[0m[34m (Priority: 1) added to ready queue[0m │ Remaining: [33m11177ms[0m of 11177ms
+[34m  ➕ [1m[36mP12[0m[34m (Priority: 7) added to ready queue[0m │ Remaining: [33m10905ms[0m of 10905ms
+[34m  ➕ [1m[36mP13[0m[34m (Priority: 9) added to ready queue[0m │ Remaining: [33m8901ms[0m of 8901ms
+[34m  ➕ [1m[36mP14[0m[34m (Priority: 5) added to ready queue[0m │ Remaining: [33m4857ms[0m of 4857ms
+
+[1m[32m╔════════════════════════════════════════════════════════════════════════════════╗[0m
+[1m[32m║[0m[42m[37m[1m                  ▶  3 CPUs STARTING (CONCURRENT SCHEDULER)  ◀                    [0m[1m[32m║[0m
+[1m[32m╚════════════════════════════════════════════════════════════════════════════════╝[0m
+
+
+[1m[92m═══ VERIFICATION (expected values are computed from YOUR seed) ═══[0m
+  Context switches (quanta executed)     expected 32       observed 0        [31m✘ MISMATCH[0m
+  Completed processes                    expected 14       observed 0        [31m✘ MISMATCH[0m
+  Total service time (ms)                expected 125592   observed 0        [31m✘ MISMATCH[0m
+  Busy-waiting polls (must be 0)         expected 0        observed 0        [92m✔[0m
+[1m[31m  ✘ At least one check failed (see the ✘ lines above): a race condition or busy waiting is still present.[0m
+
+[1m[96m═══ Process Summary Table (nominal ms) ═══[0m
+[1mProcess   Priority  Burst       Waiting       Turnaround   [0m
+──────────────────────────────────────────────────────────
+P1        8         7227        0             0            
+P2        1         6290        0             0            
+P3        9         8001        0             0            
+P4        7         11159       0             0            
+P5        3         7902        0             0            
+P6        3         12306       0             0            
+P7        7         11941       0             0            
+P8        4         12498       0             0            
+P9        8         3796        0             0            
+P10       8         8632        0             0            
+P11       1         11177       0             0            
+P12       7         10905       0             0            
+P13       9         8901        0             0            
+P14       5         4857        0             0            
+
