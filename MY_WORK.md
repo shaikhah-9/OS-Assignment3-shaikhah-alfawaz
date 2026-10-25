@@ -144,16 +144,16 @@
 
 ---
 
-### Entry 2 - [Date and Time]
-**What I did**:
+### Entry 2 - [October 25, 2026, 8:20 PM - 10:15 PM]
+**What I did**: Implemented feature 1 (protected the shared ready queue with a ReentrantLock).
 
-**Details**:
+**Details**:I studied the starter code to understand each class and why add() poll() processOf() and snapshot() are critical sections. I added the ReentrantLock import and declared one lock in ReadyQueue that protects both list and map,i protected the four methods .
 
-**Challenges**:
+**Challenges**:When I ran the program, I got an IllegalMonitorStateException in add().
 
-**Solution**:
+**Solution**:I found that lock.lock() was missing in add() .
 
-**Time spent**:
+**Time spent**: 2 hours 
 
 ---
 
