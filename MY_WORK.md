@@ -157,16 +157,16 @@
 
 ---
 
-### Entry 3 - [Date and Time]
-**What I did**:
+### Entry 3 - [October 26, 2026, 5:22 PM - 6:10 PM]
+**What I did**:Feature 2 :protected the three shared statistics counters with ReentrantLocks.
 
-**Details**:
+**Details**:In SharedStats i declared three locks, one per counter (contextSwitchLock, completedprocessLock,serviceTimeLock), because the three counters are independent and no method updates two of them together + I protected the three update methods and the three getters.
 
-**Challenges**:
+**Challenges**:I had to understand why the locks must be declared static.
 
-**Solution**:
+**Solution**:The counters and methods in SharedStats are static so the locks must be static too, otherwise the static methods cannot use them.
 
-**Time spent**:
+**Time spent**:50 min
 
 ---
 
