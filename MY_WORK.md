@@ -170,16 +170,16 @@
 
 ---
 
-### Entry 4 - [Date and Time]
-**What I did**:
+### Entry 4 - [October 27, 2026, 8:20 PM - 9:20 PM]
+**What I did**:Feature 3 replaced busy waiting with a counting semaphore and added a clean shutdown
 
-**Details**:
+**Details**: added the Semaphore import and declared readyCount in ReadyQueue with an initial value of 0, because the queue is empty when it is created. Its value is the number of processes waiting in the queue . In add(), I call readyCount.release after adding the process. In CpuWorker.run() I replaced the busy waiting code with readyCount.acquire(), so a CPU sleeps until a process is available After the fix all four lines of the verification block were ✔ .
 
-**Challenges**:
+**Challenges**:I declared the semaphore as private so CpuWorker could not use it.
 
-**Solution**:
+**Solution**:I removed private so that CpuWorker can call acquire() and release on it
 
-**Time spent**:
+**Time spent**: 1 hour
 
 ---
 
