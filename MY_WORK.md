@@ -297,7 +297,7 @@
 
 **Your Answer:** *(3-5 sentences)*
 
-[Write your answer here.]
+[in my first run the Context switches was 28 instead of 32 so 4 increaments were lost , also the Completed processes time was wrong and the total service time this is a race condition the process threads update the shared counters in SharedStats at the same time without a mutex lock so the read and the write of a counter are not one atomic step, and one thread can overwrite the update of another،On a real machine the same can happen without RaceWindow because the Operation system can preempt a thread between the read and the write, and multicore CPUs run threads at the same time. It is hard to detect because the window is very small, so the error appears randomly and is different in each run. ]
 
 Verification block of the **original starter**:
 ```
@@ -311,11 +311,41 @@ Verification block of the **original starter**:
 
 Verification block of **my final version**:
 ```
-[Paste the verification block of your final version here (all lines ✔)]
+═══ VERIFICATION (expected values are computed from YOUR seed) ═══
+  Context switches (quanta executed)     expected 32       observed 32       ✔
+  Completed processes                    expected 14       observed 14       ✔
+  Total service time (ms)                expected 125592   observed 125592   ✔
+  Busy-waiting polls (must be 0)         expected 0        observed 0        ✔
+  ✔ All shared values are consistent.
+
+═══ Process Summary Table (nominal ms) ═══
+Process   Priority  Burst       Waiting       Turnaround   
+──────────────────────────────────────────────────────────
+P1        8         7227        15288         22515        
+P2        1         6290        17555         23845        
+P3        9         8001        18889         26890        
+P4        7         11159       28191         39350        
+P5        3         7902        20158         28060        
+P6        3         12306       29269         41575        
+P7        7         11941       29394         41335        
+P8        4         12498       29577         42075        
+P9        8         3796        10194         13990        
+P10       8         8632        26953         35585        
+P11       1         11177       31373         42550        
+P12       7         10905       31610         42515        
+P13       9         8901        30639         39540        
+P14       5         4857        20268         25125      
+
 ```
 
 **Explanation of the timeline:**
-[Explain the lost update step by step.]
+[1 The thread of P1 on CPU-1 calls incrementContextSwitch() and reads contextSwitchCount = 12
+2 It calls RaceWindow.pause() and sleeps for 1 ms before writing.
+3 During this pause the thread of P2 CPU-2 also reads contextSwitchCount = 12, because the first thread has not written yet.
+4 The thread of P1 wakes up and writes 12 + 1 = 13.
+5 The thread of P2 writes 12 + 1 = 13 too, which overwrites the first update.
+6 Two quanta started, but the counter only went from 12 to 13, so one increment is lost. This happened 4 times in my run (32 − 28 = 4).
+]
 
 ## Question 2: Critical Sections and Lock Granularity
 
