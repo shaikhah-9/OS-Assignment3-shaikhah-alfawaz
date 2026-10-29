@@ -183,16 +183,16 @@
 
 ---
 
-### Entry 5 - [Date and Time]
-**What I did**:
+### Entry 5 - [October 29, 2026, 10:15 PM - 11:30 PM]
+**What I did**:Started Part C Technical Answers and completed Question 1.
 
-**Details**:
+**Details**:I compared the verification block of my starter run 
 
-**Challenges**:
+**Challenges**:I did not understand at first how the bug can happen without RaceWindow
 
-**Solution**:
+**Solution**:I learned that the operating system can stop a thread at any moment, even between the read and the write so the same bug can happen on a real machine.
 
-**Time spent**:
+**Time spent**: hour and 15 min
 
 ---
 
