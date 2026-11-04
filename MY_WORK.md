@@ -355,12 +355,17 @@ P14       5         4857        20268         25125
 
 **Your Answer:** *(3-5 sentences)*
 
-[Write your answer here.]
+[In ReadyQueue I protected add() poll() processOf()snapshot() with one ReentrantLock,and in SharedStats I protected the three update methods and the three getters with three locks so threads updating different counters do not block each other the trade off is more code than a single lock, but there is no deadlock risk because no method holds two locks at the same time,The ready queue has its own lock because list and `map` are separate data from the statistics so a CPU taking a process should not wait for a process thread updating a counter,My solution provides mutual exclusion because only one thread at a time can hold a lock and enter its critical section, A default `ReentrantLock` is not fair, so bounded waiting is not strictly guaranteed]
 
 | Critical section (variable / method) | Lock used | Why it needs protection |
 |---|---|---|
-| [e.g., `ReadyQueue.poll()`] | [lock name] | [reason] |
-| [...] | [...] | [...] |
+| [`ReadyQueue.add()` (`list`, `map`) ] | [`lock`] | [Several CPUs can re-enqueue processes at the same time] |
+| `ReadyQueue.poll()` (`list`) | `lock` | Reading the head and removing it must be one atomic step else two CPUs take the same process or one process is lost |
+| `ReadyQueue.processOf()` (`map`) | `lock` | Another CPU may modify the map in add() during the read |
+| `ReadyQueue.snapshot()` (`list`, `map`) | `lock` | The list can change during the loop | 
+| `SharedStats.incrementContextSwitch()` `getContextSwitchCount()` (`contextSwitchCount`) | `contextSwitchLock` | Read + write must be atomic otherwise increments are lost (28 instead of 32 in my starter) |
+| `SharedStats.incrementCompletedProcess()` `getCompletedProcessCount()` (`completedProcessCount`) | `completedprocessLock` | A lost update stops the counter below 14, so the CPUs never stop and the watchdog fires |
+| `SharedStats.addServiceTime()`  `getTotalServiceTime()` (`totalServiceTime`) | `serviceTimeLock` | Read + write must be atomic otherwise service time is lost  |
 
 ## Question 3: Busy Waiting vs Semaphore
 
@@ -370,7 +375,7 @@ P14       5         4857        20268         25125
 
 **Your Answer:** *(3-5 sentences)*
 
-[Write your answer here.]
+[In the starter when a CPU found the ready queue empty, it slept 20 ms and called `poll()` again in a loop, so it kept running and checking the queue instead of being blocked,which is wasted CPU time in my final version the CPU calls readyCount.acquire() so when the queue is empty it is blocked and uses no CPU time until a process is added,The value of my semaphore readyCount is the number of processes waiting in the ready queue its initial value is 0 because the queue is empty when it is created and after the 14 initial add() calls in main its value is 14, because each add() calls release(). At the end, the CPU that finishes the last process calls release(SharedStats.totalCPUs) to wake up all the CPUs blocked in acquire(), and each one sees that all processes are completed and stops Without it the other cpu would stay blocked forever because no process will ever be added again, so the program would never finish and the watchdog would stop it.]
 
 ## Question 4: Classical Problems and Deadlock
 
