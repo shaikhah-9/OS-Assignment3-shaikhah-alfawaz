@@ -386,24 +386,26 @@ P14       5         4857        20268         25125
 **Your Answer:** *(3-5 sentences)*
 
 **Classical problem and roles**:
-[Name the problem; who is the producer, who is the consumer?]
+[This is the producer consumer problem. main is a producer when it adds the 14 initial processes, and the CPUs are consumers when they take a process with poll() But the CPUs are also producers, because when a process is not finished after its quantum the CPU puts it back in the queue with add().]
 
 **Semaphores for a bounded queue (name and initial value)**:
-[Name the three semaphores and their initial values.]
+[mutex = 1: a binary semaphore that protects the queue only one thread modifies it at a time.
+empty = K: counts the free slots in the queue
+full = 0: counts the processes in the queue . It plays the same role as my readyCount semaphore.]
 
 **Deadlock scenario and prevention**:
-[Describe the scenario and the necessary condition you would break.]
+[If a producer calls wait(mutex) before wait(empty) while the queue is full it sleeps while holding mutex. A consumer would need mutex to take a process and call signal(empty) but it cannot get it, so both wait forever: this is a deadlock. To prevent it, I would break the hold and  first, and take mutex only after. My code follows this rule, because a CPU calls readyCount.acquire() before poll() takes the queue lock.]
 
 ## Summary
 
 **Key concepts I understood through these questions:**
-1.
-2.
-3.
+1.Race condition and lost update: count++ is three steps (read, modify, write) so two threads can read the same value and one update is lost
+2.Critical section and mutual exclusion: every access to shared data even a read must be protected
+3.diffrence between semaphore and busy waiting : a CPU blocked in acquire() uses no CPU time, while busy waiting keeps checking an empty queue
 
 **Concepts I need to study more:**
-1.
-2.
+1.Deadlock and the four necessary conditions
+2.Fairness and bounded waiting
 
 ---
 
